@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+kill  5204
+kill  5206
+kill  5208
+kill  5210
+kill  5212
+kill  5214
+kill  5216
+kill  5218
+kill  5220
+kill  5222
