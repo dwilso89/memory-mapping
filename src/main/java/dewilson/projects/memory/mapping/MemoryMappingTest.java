@@ -50,7 +50,7 @@ public class MemoryMappingTest {
         final long fileSize = fileChannel.size();
 
         if (fileSize > Integer.MAX_VALUE) {
-            throw new UnsupportedOperationException("Files over size of max int (4GB) are not supported...");
+            throw new UnsupportedOperationException("Files over size of max int (2GB) are not supported...");
         }
 
         System.out.println(String.format("File size: %s MB",
