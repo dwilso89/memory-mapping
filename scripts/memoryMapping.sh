@@ -10,6 +10,6 @@
 echo "#!/usr/bin/env bash" > killProcesses.sh
 
 for i in $(seq 1 $1); do {
-  java -Xmx16m -cp 'target/memory-mapping-1.0-SNAPSHOT.jar' dewilson.projects.memory.mapping.MemoryMappingTest $2 $3 $4 $5 & echo $!
+  java -Xmx16m -cp '../target/memory-mapping-1.0-SNAPSHOT.jar' dewilson.projects.memory.mapping.MemoryMappingTest $2 $3 $4 $5 & echo $!
   echo "kill " $! >> killProcesses.sh &
 } done
