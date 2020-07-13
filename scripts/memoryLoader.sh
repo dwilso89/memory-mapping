@@ -2,7 +2,7 @@
 
 # args
 # 1 - memory to load (bytes)
-# 2 - how often to reload memory (ms)
+# 2 - interval to read memory (ms)
 
 ((MAX=$1/1024/1024+4096))
 

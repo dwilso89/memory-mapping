@@ -1,6 +1,5 @@
 package dewilson.projects.memory.mapping;
 
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -12,23 +11,23 @@ final class RandomMemoryLoader {
     private final List<byte[]> memoryLoaded = new ArrayList<>();
 
     private final long memoryToLoad;
-    private final long reloadTime;
+    private final long readInterval;
 
-    private RandomMemoryLoader(final long memoryToLoad, final long reloadTime) {
+    private RandomMemoryLoader(final long memoryToLoad, final long readInterval) {
         this.memoryToLoad = memoryToLoad;
-        this.reloadTime = reloadTime;
+        this.readInterval = readInterval;
     }
 
     void start() {
         loadMemory();
 
         while (true) {
-            if (this.reloadTime > 0L) {
+            if (this.readInterval > 0L) {
                 try {
-                    Thread.sleep(this.reloadTime);
+                    Thread.sleep(this.readInterval);
                     readMemory();
                 } catch (final InterruptedException ie) {
-                    System.out.println("ERROR: Interrupted sleep after memory reload...");
+                    System.out.println("ERROR: Interrupted sleep during memory read...");
                     ie.printStackTrace();
                 }
             }
@@ -57,11 +56,7 @@ final class RandomMemoryLoader {
     private void readMemory() {
         System.out.println("Reading bytes...");
         this.memoryLoaded.forEach(bytes -> {
-            int len = 0;
-            for(byte b : bytes){
-                len++;
-            }
-            System.out.println("Length read is: " + len);
+            System.out.println(String.format("\tLength read is: %s", bytes.length));
         });
     }
 
@@ -69,14 +64,14 @@ final class RandomMemoryLoader {
 
         private long memoryToLoad = 1024 * 1024;
 
-        private long reloadTime = 0L;
+        private long readInterval = 0L;
 
         Builder() {
 
         }
 
         RandomMemoryLoader build() {
-            return new RandomMemoryLoader(this.memoryToLoad, this.reloadTime);
+            return new RandomMemoryLoader(this.memoryToLoad, this.readInterval);
         }
 
         Builder memoryToLoad(long memoryToLoad) {
@@ -84,11 +79,10 @@ final class RandomMemoryLoader {
             return this;
         }
 
-        Builder reloadTime(long reloadTime) {
-            this.reloadTime = reloadTime;
+        Builder readInterval(long readInterval) {
+            this.readInterval = readInterval;
             return this;
         }
-
 
     }
 
